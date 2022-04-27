@@ -2,16 +2,16 @@
 Link : https://leetcode.com/problems/longest-repeating-character-replacement/
 
 int characterReplacement(string s, int k) {
-        int l = 0, h = 0, maxlen = 0, res = 0;
+        int l = 0, h = 0, freq = 0, res = 0;
         unordered_map<char, int> mp;
         while(h<s.length()){
             mp[s[h]]++;
-            maxlen = max(maxlen, mp[s[h]]);
-            if((h-l+1)-maxlen > k){
+            freq = max(freq, mp[s[h]]);
+            if((h-l+1)-freq > k){
                 mp[s[l]]--;
                 l++;
             }
-            res = max(maxlen, h-l+1);
+            res = max(freq, h-l+1);
             h++;
         }
         return res;
