@@ -1,0 +1,20 @@
+
+// TWO POINTER APPROACH :
+
+int lengthOfLongestSubstring(string s) {
+        unordered_map<char, int> m;
+        int st=0,l=0,ans=0;
+        int n = s.length();
+        while(st<n and l<n and st<=l){
+            if(m.find(s[l]) == m.end()){ //Agar mp mein nahi hai toh daal do aur l++
+                m[s[l]]++;
+                l++;
+                ans = max(ans, l-st);
+            }
+            else{                         //Agar map mein hai to nikal do aur st++
+                m.erase(s[st]);
+                st++;
+            }
+        }
+        return ans;
+    }
