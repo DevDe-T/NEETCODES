@@ -1,0 +1,58 @@
+
+Leetcode : https://leetcode.com/problems/valid-sudoku/
+
+class Solution {
+public:
+bool checkBox(vector<vector<char>>& b,int x,int y)
+{
+     int start_i=(x/3)*3;   
+     int start_j=(y/3)*3;
+        
+     int val=b[x][y];
+     for(int i=start_i;i<start_i+3;i++)
+     {
+             for(int j=start_j;j<start_j+3;j++)
+             {
+                     if(val==b[i][j] and (x!=i || j!=y))
+                             return false;
+             }
+     }
+     return true;
+}
+    
+bool checkRow(vector<vector<char>>& b,int i,int j)
+{
+        for(int x=0;x<9;x++)
+        {
+                if(b[i][x]==b[i][j] and x!=j)
+                        return false;
+        }
+        return true;
+}
+    
+bool checkCol(vector<vector<char>>& b,int i,int j)
+{
+        for(int x=0;x<9;x++)
+        {
+                if(b[x][j]==b[i][j] and x!=i)
+                        return false;
+        }
+        return true;
+}
+    
+bool isValidSudoku(vector<vector<char>>& b) {
+    for(int i=0;i<9;i++)
+    {
+            for(int j=0;j<9;j++)
+            {
+                    if(b[i][j]!='.')
+                    if(!checkBox(b,i,j) || !checkRow(b,i,j) || !checkCol(b,i,j))
+                    {
+                            return false;
+                    }
+            }
+    }
+        
+    return true;
+}
+};
